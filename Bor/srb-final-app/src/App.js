@@ -6,9 +6,9 @@ const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-
 
 // Image data for the slider (using placeholders)
 const SLIDER_IMAGES = [
-    { url: "https://placehold.co/1200x500/003366/FFFFFF?text=Modern+Drilling+Rig+in+Action", alt: "Modern Drilling Rig in Action", caption: "Utilizing state-of-art machinery for precision drilling across diverse landscapes." },
-    { url: "https://placehold.co/1200x500/2962FF/FFFFFF?text=Successful+Borewell+Completion", alt: "Successful Borewell Completion", caption: "Delivering reliable, clean water to agricultural, residential, and industrial clients." },
-    { url: "https://placehold.co/1200x500/00E5FF/000000?text=Safety+and+Planning+First", alt: "Safety and Planning First", caption: "Rigorous safety protocols and geological planning ensure project success and longevity." },
+    { url: "/Image/img1.jpeg", alt: "Modern Drilling Rig in Action", caption: "Utilizing state-of-art machinery for precision drilling across diverse landscapes." },
+    { url: "/Image/img2.jpeg", alt: "Successful Borewell Completion", caption: "Delivering reliable, clean water to agricultural, residential, and industrial clients." },
+    { url: "/Image/img3.jpeg", alt: "Safety and Planning First", caption: "Rigorous safety protocols and geological planning ensure project success and longevity." },
 ];
 
 // Company contact details
@@ -137,7 +137,7 @@ const generateCsvReport = (bores, expenses) => {
 };
 
 
-// --- Icon Components ---
+// --- Icon Components (Omitted for brevity, assumed correct) ---
 const HomeIcon = () => ( <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6-4a1 1 0 001-1v-1a1 1 0 10-2 0v1a1 1 0 001 1zm5 0a1 1 0 001-1v-1a1 1 0 10-2 0v1a1 1 0 001 1z" /></svg> );
 const BoreIcon = () => ( <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg> );
 const LockIcon = () => ( <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg> );
@@ -253,15 +253,28 @@ function ImageSlider() {
     );
 }
 
-// Public Header Component (Omitted for brevity, assumed correct)
+// Public Header Component
 function PublicHeader({ setCurrentPage }) {
+  // Assuming logo.jpg is placed in the public folder, accessible via /logo.jpg
+  const LOGO_URL = "/logo.jpg";
+    
   return (
     <header className="bg-white shadow-md sticky top-0 z-10">
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-3">
-            <DrillIcon className="w-9 h-9 text-blue-600" />
-            <span className="text-2xl font-extrabold text-blue-700">Shree Ram Borwells</span>
+        {/* Logo Element (Replaces DrillIcon and text) */}
+        <div className="flex items-center">
+            <img 
+                src={LOGO_URL} 
+                alt="Shree Ram Borwells Logo" 
+                className="w-auto h-12 md:h-16 object-contain"
+                onError={(e) => { 
+                    e.target.onerror = null; 
+                    e.target.style.display = 'none'; // Hide the broken image
+                    e.target.parentElement.innerHTML = '<div class="flex items-center space-x-3"><span class="text-xl md:text-2xl font-extrabold text-blue-700">Shree Ram Borwells</span></div>';
+                }}
+            />
         </div>
+
         <div className="hidden md:flex space-x-6 items-center">
           <a href="#home" className="text-gray-600 hover:text-blue-600 font-semibold transition duration-200">Home</a>
           <a href="#gallery" className="text-gray-600 hover:text-blue-600 font-semibold transition duration-200">Highlights</a>
